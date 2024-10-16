@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Navigation from "@/components/navbar";
+
 import { NextUIProvider } from "@nextui-org/react";
 import { ToastContainer } from "react-toastify";
 
@@ -33,10 +33,8 @@ export default function RootLayout({
       >
         <NextUIProvider>
 
-
-          <Navigation />
           {children}
-          <ToastContainer />
+          {/* <ToastContainer /> */}
         </NextUIProvider>
       </body>
     </html>

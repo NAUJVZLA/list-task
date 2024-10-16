@@ -1,57 +1,74 @@
 {
   "tasks": [
     {
-      "id": "ac30",
-      "description": "juan diego debe hacer la tarea  que podrias ser s\n",
-      "name": "ahora para poder hacer la tareaa ",
-      "date": "2024-10-12",
-      "completed": false
-    },
-    {
       "id": "7c65",
       "name": "tarea de juan diego ",
       "date": "2024-10-26",
-      "description": "hacer un crud si o noo",
-      "completed": false
+      "description": "revisar tereas de juan diego todos los dias al llegar a la casa Aa",
+      "completed": true
     },
     {
       "id": "aef3",
       "name": "Hojas Rotas",
       "date": "2024-10-15",
-      "description": "juan diego tiene la mala costumbre de romper las hojas de su cuaderno y sus padres estan muy enojados ",
-      "completed": false
-    },
-    {
-      "id": "592d",
-      "description": "para poder ver ",
-      "date": "2024-10-17",
-      "name": "se necesitan ojos",
+      "description": "juan diego tiene la mala costumbre de romper las hojas de su cuaderno y sus padres estan muy enojados d",
       "completed": false
     },
     {
       "id": "793f",
-      "date": "2024-11-02",
-      "description": "eso ",
-      "name": "es",
-      "completed": true
+      "date": "2024-10-16",
+      "description": "revisar equipo grabador , una ups y instalar grafica para equipo de karen",
+      "name": "alcarraza ladrillera envigado",
+      "completed": false
     },
     {
       "id": "40b5",
-      "description": "hola ",
+      "description": "jejeje",
       "date": "2024-10-26",
-      "name": "coco jambooo"
+      "name": "coco jambooo",
+      "completed": false
     },
     {
       "id": "f7a7",
-      "description": "creando mas opciones para luego borrarlas ps ",
-      "date": "2024-11-21",
-      "name": "jeejje"
+      "description": "revisar equipo grabador y ver que problema tiene ",
+      "date": "2024-10-16",
+      "name": "ir a ed coogranada para local de juan farmacia "
     },
     {
       "id": "c9f7",
-      "name": "coas que necesito ",
-      "description": "s",
-      "date": "2024-10-12"
+      "name": "ensayar gtx 1660ti ",
+      "description": "van a casa a revisar grafica que tengo guardada para vender",
+      "date": "2024-10-18"
+    },
+    {
+      "id": "a54b",
+      "name": "reparar portatiles panasonic grupo 20 ",
+      "date": "2024-10-15",
+      "description": "cambiar 3 pantallas a equipos con defecto de pantalla "
+    },
+    {
+      "id": "ac6c",
+      "name": "nerea las palmas ",
+      "date": "2024-10-16",
+      "description": "se muda de hogar y se va a font living en las palmas quitar las 5 camaras y  instalar para lo antes posible"
+    },
+    {
+      "id": "d4e6",
+      "name": "ir a unidad campestre de poblado",
+      "description": " para terminar instalacion de camara de assensor ",
+      "date": "2024-10-16"
+    },
+    {
+      "id": "c510",
+      "description": "relleno ",
+      "date": "2024-10-11",
+      "name": "RELLENO"
+    },
+    {
+      "id": "dcac",
+      "name": "eric es una marc",
+      "date": "2024-10-05",
+      "description": "eeee"
     }
   ]
 }

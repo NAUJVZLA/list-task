@@ -1,90 +1,94 @@
-import { NextResponse } from "next/server";
-import fs from 'fs/promises';
-import path from 'path';
+import { NextRequest, NextResponse } from "next/server";
 
-export interface Task {
-    id: number;
-    name: string;
-    date: string;
-    description: string;
-    completed: boolean;
+
+const API_URL = 'http://localhost:8000/tasks';
+
+export async function GET(req: NextRequest) {
+  // Extraemos los parámetros de la URL de la solicitud
+  const { searchParams } = new URL(req.url);
+  const filter = searchParams.get("filter"); // Obtenemos el valor del parámetro "filter" si existe
+  
+  let url = API_URL;
+
+  // Dependiendo del filtro, modificamos la URL para filtrar las tareas
+  if (filter === "completed") {
+    url += '?completed=true'; // Si el filtro es "completed", buscamos tareas completadas
+  } else if (filter === "incomplete") {
+    url += '?completed=false'; // Si el filtro es "incomplete", buscamos tareas no completadas
+  }
+
+  const response = await fetch(url);
+
+  const tasks = await response.json();
+
+
+  return NextResponse.json(tasks);
 }
 
-const dbPath = path.join(process.cwd(), 'db.json');
+//  (crear nuevas tareas)
+export async function POST(req: NextRequest) {
+  // Extraemos el cuerpo de la solicitud en formato JSON
+  const body = await req.json();
+  
+ 
+  const response = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' }, // Especificamos que el contenido es JSON
+    body: JSON.stringify(body) // Convertimos el cuerpo de la solicitud a JSON
+  });
 
-async function getTasks(): Promise<Task[]> {
-    const data = await fs.readFile(dbPath, 'utf8');
-    return JSON.parse(data).tasks;
+ 
+  if (!response.ok) {
+    return NextResponse.json({ message: "Failed to create task" }, { status: response.status });
+  }
+
+  // Convertimos la respuesta en JSON para obtener la tarea recién creada
+  const newTask = await response.json();
+  // Devolvemos la nueva tarea con un código de estado 201 (creado)
+  return NextResponse.json(newTask, { status: 201 });
 }
 
-async function saveTasks(tasks: Task[]): Promise<void> {
-    await fs.writeFile(dbPath, JSON.stringify({ tasks }, null, 2));
+//  (actualizar tareas)
+export async function PUT(req: NextRequest) {
+  // Extraemos el cuerpo de la solicitud en formato JSON
+  const body = await req.json();
+  
+  // Hacemos una solicitud PUT a la API para actualizar una tarea existente
+  const response = await fetch(API_URL, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' }, // Especificamos que el contenido es JSON
+    body: JSON.stringify(body) // Convertimos el cuerpo de la solicitud a JSON
+  });
+
+
+  if (!response.ok) {
+    return NextResponse.json({ message: "Failed to update task" }, { status: response.status });
+  }
+
+  const updatedTask = await response.json();
+  // Devolvemos la tarea actualizada como respuesta JSON
+  return NextResponse.json(updatedTask);
 }
 
-export async function GET(req: Request) {
-    const url = new URL(req.url);
-    const status = url.searchParams.get("status");
-    let tasks = await getTasks();
+// (eliminar tareas)
+export async function DELETE(req: NextRequest) {
+  // Extraemos los parámetros de la URL de la solicitud
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get("id"); // Obtenemos el valor del parámetro "id" si existe
 
-    if (status === "completed") {
-        tasks = tasks.filter((task) => task.completed);
-    } else if (status === "incomplete") {
-        tasks = tasks.filter((task) => !task.completed);
-    }
+  // Si no se proporciona un ID, devolvemos un error 400 (solicitud incorrecta)
+  if (!id) {
+    return NextResponse.json({ message: "Task ID is required" }, { status: 400 });
+  }
 
-    return NextResponse.json(tasks);
-}
+  // Realizamos una solicitud DELETE a la API con el ID proporcionado
+  const response = await fetch(`${API_URL}?id=${id}`, { method: 'DELETE' });
 
-export async function POST(req: Request) {
-    const body = await req.json();
-    if (!body || !body.date || !body.description || !body.name) {
-        return NextResponse.json({
-            message: "La tarea no es válida"
-        }, { status: 400 });
-    }
 
-    const tasks = await getTasks();
-    const newTask: Task = { id: Date.now(), completed: false, ...body };
-    tasks.push(newTask);
-    await saveTasks(tasks);
+  if (!response.ok) {
+    return NextResponse.json({ message: "Failed to delete task" }, { status: response.status });
+  }
 
-    return NextResponse.json(newTask, { status: 201 });
-}
-
-export async function PUT(req: Request) {
-    const body = await req.json();
-    if (!body || !body.id) {
-        return NextResponse.json({
-            message: "La tarea no es válida"
-        }, { status: 400 });
-    }
-
-    let tasks = await getTasks();
-    const index = tasks.findIndex(task => task.id === body.id);
-    if (index === -1) {
-        return NextResponse.json({
-            message: "Tarea no encontrada"
-        }, { status: 404 });
-    }
-
-    tasks[index] = { ...tasks[index], ...body };
-    await saveTasks(tasks);
-
-    return NextResponse.json(tasks[index]);
-}
-
-export async function DELETE(req: Request) {
-    const url = new URL(req.url);
-    const id = url.searchParams.get("id");
-    if (!id) {
-        return NextResponse.json({
-            message: "ID de tarea no proporcionado"
-        }, { status: 400 });
-    }
-
-    let tasks = await getTasks();
-    tasks = tasks.filter(task => task.id !== parseInt(id));
-    await saveTasks(tasks);
-
-    return NextResponse.json({ message: "Tarea eliminada con éxito" });
+ 
+  return NextResponse.json({ message: "Task deleted successfully" });
 }
