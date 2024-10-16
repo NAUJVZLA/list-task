@@ -1,0 +1,57 @@
+{
+  "tasks": [
+    {
+      "id": "ac30",
+      "description": "juan diego debe hacer la tarea  que podrias ser s\n",
+      "name": "ahora para poder hacer la tareaa ",
+      "date": "2024-10-12",
+      "completed": false
+    },
+    {
+      "id": "7c65",
+      "name": "tarea de juan diego ",
+      "date": "2024-10-26",
+      "description": "hacer un crud si o noo",
+      "completed": false
+    },
+    {
+      "id": "aef3",
+      "name": "Hojas Rotas",
+      "date": "2024-10-15",
+      "description": "juan diego tiene la mala costumbre de romper las hojas de su cuaderno y sus padres estan muy enojados ",
+      "completed": false
+    },
+    {
+      "id": "592d",
+      "description": "para poder ver ",
+      "date": "2024-10-17",
+      "name": "se necesitan ojos",
+      "completed": false
+    },
+    {
+      "id": "793f",
+      "date": "2024-11-02",
+      "description": "eso ",
+      "name": "es",
+      "completed": true
+    },
+    {
+      "id": "40b5",
+      "description": "hola ",
+      "date": "2024-10-26",
+      "name": "coco jambooo"
+    },
+    {
+      "id": "f7a7",
+      "description": "creando mas opciones para luego borrarlas ps ",
+      "date": "2024-11-21",
+      "name": "jeejje"
+    },
+    {
+      "id": "c9f7",
+      "name": "coas que necesito ",
+      "description": "s",
+      "date": "2024-10-12"
+    }
+  ]
+}
